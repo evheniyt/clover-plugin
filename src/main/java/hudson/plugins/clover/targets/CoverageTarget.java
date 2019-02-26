@@ -17,19 +17,19 @@ import java.util.Set;
  */
 public class CoverageTarget implements Serializable {
 
-    private Integer methodCoverage;
+    private float methodCoverage;
 
-    private Integer conditionalCoverage;
+    private float conditionalCoverage;
 
-    private Integer statementCoverage;
+    private float statementCoverage;
 
-    private Integer elementCoverage;
+    private float elementCoverage;
 
     public CoverageTarget() {
     }
 
     @DataBoundConstructor
-    public CoverageTarget(Integer methodCoverage, Integer conditionalCoverage, Integer statementCoverage) {
+    public CoverageTarget(float methodCoverage, float conditionalCoverage, float statementCoverage) {
         this.methodCoverage = methodCoverage;
         this.conditionalCoverage = conditionalCoverage;
         this.statementCoverage = statementCoverage;
@@ -53,7 +53,7 @@ public class CoverageTarget implements Serializable {
     public Set<CoverageMetric> getFailingMetrics(AbstractCloverMetrics coverage) {
         final Set<CoverageMetric> result = new HashSet<CoverageMetric>();
 
-        if (methodCoverage != null && coverage.getMethodCoverage().getPercentage() < methodCoverage) {
+        if (methodCoverage != null && coverage.getMethodCoverage().getPercentageFloat() < methodCoverage) {
             result.add(CoverageMetric.METHOD);
         }
 
@@ -105,7 +105,7 @@ public class CoverageTarget implements Serializable {
      *
      * @return Value for property 'methodCoverage'.
      */
-    public Integer getMethodCoverage() {
+    public float getMethodCoverage() {
         return methodCoverage;
     }
 
@@ -114,7 +114,7 @@ public class CoverageTarget implements Serializable {
      *
      * @param methodCoverage Value to set for property 'methodCoverage'.
      */
-    public void setMethodCoverage(Integer methodCoverage) {
+    public void setMethodCoverage(float methodCoverage) {
         this.methodCoverage = methodCoverage;
     }
 
