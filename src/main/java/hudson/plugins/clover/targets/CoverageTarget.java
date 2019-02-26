@@ -17,19 +17,19 @@ import java.util.Set;
  */
 public class CoverageTarget implements Serializable {
 
-    private float methodCoverage;
+    private Float methodCoverage;
 
-    private float conditionalCoverage;
+    private Float conditionalCoverage;
 
-    private float statementCoverage;
+    private Float statementCoverage;
 
-    private float elementCoverage;
+    private Float elementCoverage;
 
     public CoverageTarget() {
     }
 
     @DataBoundConstructor
-    public CoverageTarget(float methodCoverage, float conditionalCoverage, float statementCoverage) {
+    public CoverageTarget(Float methodCoverage, Float conditionalCoverage, Float statementCoverage) {
         this.methodCoverage = methodCoverage;
         this.conditionalCoverage = conditionalCoverage;
         this.statementCoverage = statementCoverage;
@@ -57,23 +57,23 @@ public class CoverageTarget implements Serializable {
             result.add(CoverageMetric.METHOD);
         }
 
-        if (conditionalCoverage != null && coverage.getConditionalCoverage().getPercentage() < conditionalCoverage) {
+        if (conditionalCoverage != null && coverage.getConditionalCoverage().getPercentageFloat() < conditionalCoverage) {
             result.add(CoverageMetric.CONDITIONAL);
         }
 
-        if (statementCoverage != null && coverage.getStatementCoverage().getPercentage() < statementCoverage) {
+        if (statementCoverage != null && coverage.getStatementCoverage().getPercentageFloat() < statementCoverage) {
             result.add(CoverageMetric.STATEMENT);
         }
 
-        if (elementCoverage != null && coverage.getElementCoverage().getPercentage() < elementCoverage) {
+        if (elementCoverage != null && coverage.getElementCoverage().getPercentageFloat() < elementCoverage) {
             result.add(CoverageMetric.ELEMENT);
         }
 
         return result;
     }
 
-    public Map<CoverageMetric, Integer> getRangeScores(CoverageTarget min, AbstractCloverMetrics coverage) {
-        final Map<CoverageMetric, Integer> result = new HashMap<CoverageMetric, Integer>();
+    public Map<CoverageMetric, Float> getRangeScores(CoverageTarget min, AbstractCloverMetrics coverage) {
+        final Map<CoverageMetric, Float> result = new HashMap<CoverageMetric, Float>();
 
         result.put(CoverageMetric.METHOD,
                 calcRangeScore(methodCoverage, min.methodCoverage, coverage.getMethodCoverage().getPercentage()));
@@ -90,11 +90,11 @@ public class CoverageTarget implements Serializable {
         return result;
     }
 
-    private static int calcRangeScore(Integer max, Integer min, int value) {
+    private static int calcRangeScore(Float max, Float min, int value) {
         if (min == null || min < 0) min = 0;
         if (max == null || max > 100) max = 100;
         if (min > max) min = max - 1;
-        int result = (int)(100f * (value - min.floatValue()) / (max.floatValue() - min.floatValue()));
+        result = (100f * (value - min.floatValue()) / (max.floatValue() - min.floatValue()));
         if (result < 0) return 0;
         if (result > 100) return 100;
         return result;
@@ -105,7 +105,7 @@ public class CoverageTarget implements Serializable {
      *
      * @return Value for property 'methodCoverage'.
      */
-    public float getMethodCoverage() {
+    public Float getMethodCoverage() {
         return methodCoverage;
     }
 
@@ -114,7 +114,7 @@ public class CoverageTarget implements Serializable {
      *
      * @param methodCoverage Value to set for property 'methodCoverage'.
      */
-    public void setMethodCoverage(float methodCoverage) {
+    public void setMethodCoverage(Float methodCoverage) {
         this.methodCoverage = methodCoverage;
     }
 
@@ -123,7 +123,7 @@ public class CoverageTarget implements Serializable {
      *
      * @return Value for property 'conditionalCoverage'.
      */
-    public Integer getConditionalCoverage() {
+    public Float getConditionalCoverage() {
         return conditionalCoverage;
     }
 
@@ -132,7 +132,7 @@ public class CoverageTarget implements Serializable {
      *
      * @param conditionalCoverage Value to set for property 'conditionalCoverage'.
      */
-    public void setConditionalCoverage(Integer conditionalCoverage) {
+    public void setConditionalCoverage(Float conditionalCoverage) {
         this.conditionalCoverage = conditionalCoverage;
     }
 
@@ -141,7 +141,7 @@ public class CoverageTarget implements Serializable {
      *
      * @return Value for property 'statementCoverage'.
      */
-    public Integer getStatementCoverage() {
+    public Float getStatementCoverage() {
         return statementCoverage;
     }
 
@@ -150,7 +150,7 @@ public class CoverageTarget implements Serializable {
      *
      * @param statementCoverage Value to set for property 'statementCoverage'.
      */
-    public void setStatementCoverage(Integer statementCoverage) {
+    public void setStatementCoverage(Float statementCoverage) {
         this.statementCoverage = statementCoverage;
     }
 
@@ -159,7 +159,7 @@ public class CoverageTarget implements Serializable {
      *
      * @return Value for property 'elementCoverage'.
      */
-    public Integer getElementCoverage() {
+    public Float getElementCoverage() {
         return elementCoverage;
     }
 
@@ -168,7 +168,7 @@ public class CoverageTarget implements Serializable {
      *
      * @param elementCoverage Value to set for property 'elementCoverage'.
      */
-    public void setElementCoverage(Integer elementCoverage) {
+    public void setElementCoverage(Float elementCoverage) {
         this.elementCoverage = elementCoverage;
     }
 }
