@@ -90,11 +90,11 @@ public class CoverageTarget implements Serializable {
         return result;
     }
 
-    private static int calcRangeScore(Float max, Float min, int value) {
-        if (min == null || min < 0) min = 0;
-        if (max == null || max > 100) max = 100;
+    private static float calcRangeScore(Float max, Float min, float value) {
+        if (min == null || min < 0) min = 0f;
+        if (max == null || max > 100) max = 100f;
         if (min > max) min = max - 1;
-        result = (100f * (value - min.floatValue()) / (max.floatValue() - min.floatValue()));
+        float result = (100f * (value - min.floatValue()) / (max.floatValue() - min.floatValue()));
         if (result < 0) return 0;
         if (result > 100) return 100;
         return result;

@@ -370,7 +370,7 @@ public class CloverPublisher extends Recorder implements SimpleBuildStep {
             );
             // start ugly hack
             if (instance.healthyTarget.isEmpty()) {
-                instance.healthyTarget = new CoverageTarget(70, 80, 80);
+                instance.healthyTarget = new CoverageTarget(70f, 80f, 80f);
             }
             // end ugly hack
             return instance;
@@ -389,9 +389,9 @@ public class CloverPublisher extends Recorder implements SimpleBuildStep {
             );
         }
 
-        private Integer getIntParameter(StaplerRequest req, String name) {
+        private Float getIntParameter(StaplerRequest req, String name) {
             try {
-                return Integer.valueOf(req.getParameter(name));
+                return Float.valueOf(req.getParameter(name));
             } catch (NumberFormatException ex) {
                 return null;
             }
