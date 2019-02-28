@@ -214,7 +214,7 @@ public class CloverPublisher extends Recorder implements SimpleBuildStep {
             }
             else {
                 final Set<CoverageMetric> healthyMetrics = getHealthyMetrics(result);
-                listener.getLogger().println("Testing coverage result:" + healthyMetrics)
+                listener.getLogger().println("Testing coverage result:" + healthyMetrics);
             }
         } else {
             flagMissingCloverXml(listener, build);
