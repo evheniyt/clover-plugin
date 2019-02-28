@@ -1,5 +1,6 @@
 package hudson.plugins.clover.targets;
 
+import hudson.EnvVars;
 import hudson.plugins.clover.results.AbstractCloverMetrics;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -67,6 +68,28 @@ public class CoverageTarget implements Serializable {
 
         if (elementCoverage != null && coverage.getElementCoverage().getPercentageFloat() < elementCoverage) {
             result.add(CoverageMetric.ELEMENT);
+        }
+
+        return result;
+    }
+
+    public Set<CoverageMetric> getHealthyMetrics(AbstractCloverMetrics coverage) {
+        Map result = new HashMap();
+
+        if (methodCoverage != null && coverage.getMethodCoverage().getPercentageFloat() > methodCoverage) {
+            result.put("methodCoverage", methodCoverage);
+        }
+
+        if (conditionalCoverage != null && coverage.getConditionalCoverage().getPercentageFloat() > conditionalCoverage) {
+            result.put("conditionalCoverage", conditionalCoverage);
+        }
+
+        if (statementCoverage != null && coverage.getStatementCoverage().getPercentageFloat() > statementCoverage) {
+            result.put("statementCoverage", statementCoverage);
+        }
+
+        if (elementCoverage != null && coverage.getElementCoverage().getPercentageFloat() > elementCoverage) {
+            result.put("elementCoverage", elementCoverage);
         }
 
         return result;
@@ -170,5 +193,13 @@ public class CoverageTarget implements Serializable {
      */
     public void setElementCoverage(Float elementCoverage) {
         this.elementCoverage = elementCoverage;
+    }
+
+    @Override public void buildEnvVars(Map<String,String> env) {
+        if (env instanceof EnvVars) {
+            ((EnvVars) env).overrideAll(c.env);
+        } else { // ?
+            env.putAll(c.env);
+        }
     }
 }
