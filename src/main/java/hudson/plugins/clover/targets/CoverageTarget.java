@@ -73,7 +73,7 @@ public class CoverageTarget implements Serializable {
         return result;
     }
 
-    public Set<CoverageMetric> getHealthyMetrics(AbstractCloverMetrics coverage) {
+    public Map getHealthyMetrics(AbstractCloverMetrics coverage) {
         Map result = new HashMap();
 
         if (methodCoverage != null && coverage.getMethodCoverage().getPercentageFloat() > methodCoverage) {
